@@ -13,6 +13,8 @@ This repository documents my progressive journey in bridging analytical circuit 
 ## 🛠️ Projects
 
 ### 1. Modular DC Circuit Analyzer (Week 1)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Aarav2123/ece-python-fundamentals/blob/main/WEEK1_PROJECT.ipynb)
+
 * **File:** `WEEK1_PROJECT.ipynb`
 * **Description:** A modular script for calculating electrical parameters across basic DC circuit networks.
 * **Key Features:**
@@ -23,6 +25,8 @@ This repository documents my progressive journey in bridging analytical circuit 
 ---
 
 ### 2. RC Low-Pass Filter Evaluator (Week 2)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Aarav2123/ece-python-fundamentals/blob/main/Week2_RC_Low_Pass_Filter.ipynb)
+
 * **File:** `Week2_RC_Low_Pass_Filter.ipynb`
 * **Description:** Analytical evaluation and frequency response calculator for single-pole passive RC low-pass filters.
 
@@ -47,5 +51,5 @@ This repository documents my progressive journey in bridging analytical circuit 
 ---
 
 ## 👤 Author
-* **Aarav Sharma** – 1st Year ECE Student,IIIT Jabalpur
+* **Aarav Sharma** – 1st Year ECE Student, IIIT Jabalpur
 * **Focus:** Signal Processing, Analog Circuit Simulation, Embedded Systems
