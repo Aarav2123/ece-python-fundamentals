@@ -47,5 +47,5 @@ This repository documents my progressive journey in bridging analytical circuit 
 ---
 
 ## 👤 Author
-* **Aarav Sharma** – 1st Year ECE Student
+* **Aarav Sharma** – 1st Year ECE Student,IIIT Jabalpur
 * **Focus:** Signal Processing, Analog Circuit Simulation, Embedded Systems
