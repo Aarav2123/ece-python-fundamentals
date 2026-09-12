@@ -42,147 +42,70 @@ This repository documents my progressive journey in bridging analytical circuit 
 * **Signal Classification:** Uses tolerance-aware classification (`math.isclose`) to group system state into **Passband**, **$-3\text{dB}$ Corner Cutoff**, or **Stopband**.
 
 ---
-RC Low-Pass Filter: Time-Domain Response Visualizer
+# RC Low-Pass Filter: Time-Domain Signal Visualizer
 
-A scientific computing tool built in Python to simulate, calculate, and visualize the time-domain voltage response and phase lag of a first-order passive RC low-pass filter.
+An interactive Python simulation tool to compute, analyze, and visualize the time-domain signal response of a first-order passive RC low-pass filter. 
 
-This project bridges theoretical AC circuit theory with numerical computing, leveraging NumPy for vectorized signal generation and Matplotlib for high-resolution engineering plots.
+This project models continuous sinusoidal input signals and demonstrates real-time amplitude attenuation and phase shift ($\theta$) across different frequency operating regions (Passband, Corner Frequency, and Stopband).
 
-Technical Overview
+---
 
-A passive RC low-pass filter passes low-frequency signals while attenuating frequencies above its cutoff frequency ($f_c$). Because a capacitor takes finite time to charge and discharge ($q = C \cdot v$), output signals undergo both magnitude attenuation and phase delay relative to the input signal.
+## 📌 Project Features
 
-This software models the behavior of an RC network under sinusoidal steady-state excitation, taking circuit component values ($R, C$) and input signal metrics ($f, V_{in}$) to plot high-resolution continuous waveforms over three full time periods ($3T$).
+- **Input Validation:** Interactive prompts for resistance ($R$), capacitance ($C$), frequency ($f$), and voltage ($V_{in}$) with physical boundary safety checks.
+- **Physics Engine:** Computes exact cutoff frequency ($f_c$), voltage gain ($A_v$), gain in decibels ($\text{dB}$), output voltage ($V_{out}$), and phase lag ($\theta$).
+- **Vectorized Signal Processing:** Uses `numpy.linspace` to sample 3 full signal cycles across 1,000 discrete points.
+- **Publication-Quality Export:** Automatically generates and saves a 300 DPI publication-ready plot (`Week3_Sine_Wave_Visualizer.png`).
 
-Circuit Theory & Mathematical Derivations
+---
 
-1. Transfer Function & Cutoff Frequency
+## 🧮 Theoretical Background & Equations
 
-The transfer function $H(j\omega)$ of a passive RC circuit acting as a voltage divider is given by:
+A passive first-order low-pass filter consists of a resistor ($R$) in series with a capacitor ($C$). The output is taken across the capacitor.
 
-$$H(j\omega) = \frac{V_{out}}{V_{in}} = \frac{Z_C}{R + Z_C} = \frac{1}{1 + j\omega RC}$$
-
-where $\omega = 2\pi f$ is the angular frequency and $Z_C = \frac{1}{j\omega C}$ is the capacitive reactance.
-
-The Cutoff Frequency ($f_c$), or the $-3\text{ dB}$ half-power point where $R = X_C$, is derived as:
-
+### 1. Cutoff Frequency ($f_c$)
+The half-power (-3 dB corner) frequency where capacitive reactance equals resistance ($X_C = R$):
 $$f_c = \frac{1}{2\pi R C}$$
 
-2. Voltage Gain & Attenuation
-
-The magnitude of the complex transfer function determines the voltage gain $A_v$:
-
-$$A_v = \vert{}H(j\omega)\vert{} = \frac{1}{\sqrt{1 + \left(\frac{f}{f_c}\right)^2}}$$
-
-The output amplitude $V_{out}$ and attenuation in decibels are:
-
-$$V_{out} = V_{in} \cdot A_v$$
+### 2. Voltage Gain ($A_v$) & Decibel Attenuation
+$$A_v = \frac{V_{out}}{V_{in}} = \frac{1}{\sqrt{1 + \left(\frac{f}{f_c}\right)^2}}$$
 
 $$\text{Gain}_{\text{dB}} = 20 \log_{10}(A_v)$$
 
-3. Phase Lag ($\theta$)
+### 3. Phase Shift ($\theta$)
+Because the capacitor requires time to charge, the output waveform lags behind the input:
+$$\theta = -\arctan\left(\frac{f}{f_c}\right) \quad \text{(in radians)}$$
 
-The phase response of the system represents the temporal lag of the output waveform relative to the input:
-
-$$\theta = \angle H(j\omega) = -\arctan\left(\frac{f}{f_c}\right) \quad \text{[radians]}$$
-
-4. Continuous Vectorized Wave Equations
-
-Using NumPy, continuous signal arrays over three complete cycles ($t \in [0, 3T]$) are calculated using vectorized array math:
-
+### 4. Time-Domain Signal Modeling
 $$v_{in}(t) = V_{in} \sin(2\pi f t)$$
-
 $$v_{out}(t) = V_{out} \sin(2\pi f t + \theta)$$
 
-Project Structure
+---
 
-├── Week3_Sine_Wave_Visualizer.ipynb   # Interactive Jupyter Notebook implementation
-├── main.py                            # Standalone Python script with terminal inputs
-├── RC_Visualizer.png                  # Exported 300-DPI engineering plot
-├── requirements.txt                   # Project dependencies
-└── README.md                          # Project documentation
+## 🚀 Quick Start
 
+### Prerequisites
 
-Installation & Setup
+Ensure Python 3.8+ and the required scientific libraries are installed:
 
-Prerequisites
-
-Python 3.9 or higher
-
-pip package manager
-
-Installation Steps
-
-Clone the repository:
-
-git clone https://github.com/your-username/rc-filter-visualizer.git
-cd rc-filter-visualizer
-
-
-Create and activate a virtual environment (optional but recommended):
-
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-
-Install required libraries:
-
+```bash
 pip install numpy matplotlib
 
-
-Usage
-
-Run the main Python script from your terminal:
-
-python main.py
-
-
-Prompt Example:
-
-What is the Resistance (in Ohms)?: 1000
-What is the Capacitance (in Farads)?: 1e-6
-What is the Signal Frequency (in Hertz)?: 1000
-What is the Signal Voltage (in Volts)?: 5.0
-
-
-Terminal Output:
+git clone [https://github.com/YOUR_GITHUB_USERNAME/RC-Filter-Visualizer.git](https://github.com/YOUR_GITHUB_USERNAME/RC-Filter-Visualizer.git)
+cd RC-Filter-Visualizer
+python Week3_Sine_Wave_Visualizer.py
 
 ========================================
       RC LOW-PASS FILTER RESULTS        
 ========================================
- Cutoff Frequency (fc) : 159.15 Hz
- Voltage Gain (Av)     : 0.157
- Gain in Decibels      : -16.07 dB
- Output Voltage (Vout) : 0.79 V
- Phase Shift           : -80.96°
+ Cutoff Frequency (fc) : 1591.55 Hz
+ Voltage Gain (Av)     : 0.707
+ Gain in Decibels      : -3.01 dB
+ Output Voltage (Vout) : 3.54 V
+ Phase Shift           : -45.00°
 ----------------------------------------
-Signal Region: Stopband (High-Frequency Attenuation)
+Signal Region: Cutoff Frequency (-3dB Corner Point)
 ========================================
-
-
-Generated Visualization
-
-Upon calculation, the program renders and exports a 300-DPI engineering plot (RC_Visualizer.png):
-
-Key Visualization Features:
-
-Dual-Trace Overlay: Clear visual contrast between $v_{in}(t)$ (dashed blue) and $v_{out}(t)$ (solid red).
-
-Dynamic LaTeX Labels: Plot title updates dynamically with calculated $V_{out}$ and phase lag $\theta$.
-
-High-DPI Output: Clean gridlines and zero-line references optimized for research reporting.
-
-Future Extensions
-
-[ ] Add frequency-domain Bode Plots (Magnitude & Phase vs Frequency).
-
-[ ] Implement active RC filter topologies (e.g., Sallen-Key 2nd-order filters).
-
-[ ] Add CSV export capabilities for time-series data validation against laboratory oscilloscope logs.
-
-License
-
-Distributed under the MIT License. See LICENSE for more information.
 
 ## 🧰 Tech Stack
 * **Language:** Python 3.x
